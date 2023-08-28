@@ -1,0 +1,15 @@
+header {
+  @apply flex px-[2em] py-[4em];
+  ul {
+    @apply container flex gap-[1.8em] text-[1.8em] uppercase font-[600] max-w-[1440px];
+    li {
+      @apply relative;
+      a {
+        @apply text-primary z-10 relative cursor-pointer;
+      }
+      span {
+        @apply absolute text-dark text-[1.2em] -left-[0.6em] -top-[0.6em];
+      }
+    }
+  }
+}
