@@ -1,0 +1,11 @@
+.spinner-container {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  @apply absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center z-[10];
+  svg {
+    @apply mr-10 w-30 h-30 text-gray-200 animate-spin fill-secondary;
+  }
+  h6 {
+    @apply font-[400] text-[20px] text-primary z-[10] relative mt-[10px];
+  }
+}
