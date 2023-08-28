@@ -19,7 +19,7 @@ export const Meal = () => {
   return (
     <div className="meal-container">
       <div>
-        <span className="font-mulish" onClick={() => navigate('/filter')}>
+        <span className="font-mulish" onClick={() => navigate('/')}>
           Back
         </span>
         <div>
