@@ -15,3 +15,8 @@ declare interface NavListObject {
   route: string;
   shadow: string;
 }
+
+declare interface filterOptionListObject {
+  label: string;
+  value: string;
+}
