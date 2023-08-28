@@ -4,6 +4,7 @@ import axios from 'axios';
 interface State {
   isLoading: boolean;
   latestData: any[];
+  randomData: any[];
 }
 
 interface ProviderProps {
@@ -33,7 +34,8 @@ function reducer(state: State, { type, payload }: Action): State {
 
 const INIT_STATE: State = {
   isLoading: false,
-  latestData: []
+  latestData: [],
+  randomData: []
 };
 
 export default function Provider({ children }: ProviderProps): JSX.Element {
@@ -46,6 +48,7 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
         payload: true
       });
       await getLatestData();
+      await getRandomData();
       dispatch({
         type: 'isLoading',
         payload: false
@@ -60,6 +63,17 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
       type: 'latestData',
       payload: result.data.meals
     });
+  };
+  const getRandomData = async () => {
+    try {
+      const result = await axios.get('https://themealdb.com/api/json/v2/1/randomselection.php');
+      dispatch({
+        type: 'randomData',
+        payload: result.data.meals
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return <PartyContext.Provider value={useMemo(() => [state, dispatch], [state])}>{children}</PartyContext.Provider>;
