@@ -1,0 +1,16 @@
+.home-container {
+  @apply flex px-[2em] pb-[2em];
+  > div {
+    @apply container flex flex-col gap-[4em] max-w-[1440px];
+    > div {
+      @apply flex flex-col gap-[14px];
+      > h4 {
+        font-family: 'Montserrat', sans-serif;
+        @apply text-primary text-[20px] sm:text-[1.4em] font-[600];
+      }
+      > div {
+        @apply grid xsx:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 justify-center items-center gap-[1.2em];
+      }
+    }
+  }
+}
