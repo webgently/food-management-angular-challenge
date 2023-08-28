@@ -1,0 +1,54 @@
+.filter-container {
+  font-family: 'Montserrat', sans-serif;
+  @apply px-[2em];
+  > div {
+    @apply container flex flex-col lg:flex-row gap-[0.6em] text-[1.8em] font-[600] max-w-[1440px];
+    .filter-group {
+      @apply w-full lg:w-[32%] xl:w-[25%] bg-thick text-[20px] p-[1.4em] h-min rounded-[10px];
+      h3 {
+        @apply text-primary text-[1.2em];
+      }
+
+      .filter-controller {
+        @apply flex flex-col md:flex-row lg:flex-col gap-[1.8em] pt-[2em];
+        > div {
+          @apply flex flex-col gap-[4px] font-[400] w-full;
+          .filter-option-selection {
+            @apply flex flex-col sm:flex-row lg:flex-col gap-[10px];
+            > div {
+              @apply flex items-center gap-[10px];
+            }
+          }
+
+          label {
+            @apply text-primary text-[0.8em];
+          }
+
+          input[type='text'], select {
+            @apply bg-dark outline-none border-none text-[0.8em] text-primary w-full p-[0.2em_0.4em] min-h-[38px] rounded-[4px];
+          }
+
+          input[type='radio'] {
+            @apply bg-secondary;
+          }
+
+        }
+      }
+
+      button {
+        @apply bg-secondary text-primary rounded-[20px] min-h-[40px] w-full mt-[4em];
+      }
+    }
+
+    .filter-result-container {
+      @apply w-full lg:w-[68%] xl:w-[75%] h-min pb-[2em];
+      > div {
+        @apply grid md:grid-cols-2 xl:grid-cols-3 justify-center items-center gap-[0.4em] xl:gap-[0.8em];
+      }
+
+      > span {
+        @apply bg-thick flex justify-center items-center text-primary text-[20px] p-[1.4em] rounded-[10px];
+      }
+    }
+  }
+}
