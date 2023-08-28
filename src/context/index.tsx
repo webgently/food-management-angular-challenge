@@ -5,6 +5,7 @@ interface State {
   isLoading: boolean;
   latestData: any[];
   randomData: any[];
+  ingredientById: Object;
 }
 
 interface ProviderProps {
@@ -35,7 +36,8 @@ function reducer(state: State, { type, payload }: Action): State {
 const INIT_STATE: State = {
   isLoading: false,
   latestData: [],
-  randomData: []
+  randomData: [],
+  ingredientById: {}
 };
 
 export default function Provider({ children }: ProviderProps): JSX.Element {
@@ -56,7 +58,6 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
     })();
     // eslint-disable-next-line
   }, []);
-
   const getLatestData = async () => {
     const result = await axios.get(`https://themealdb.com/api/json/v2/1/latest.php`);
     dispatch({
@@ -75,6 +76,64 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
       console.log(err);
     }
   };
+  const getIngredientById = async (id: string) => {
+    try {
+      const result = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+      dispatch({
+        type: 'ingredientById',
+        payload: await generateDetailData(result.data.meals[0])
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const generateDetailData = (data: any) => {
+    const {
+      strArea,
+      strCategory,
+      strInstructions,
+      strMeal,
+      strMealThumb,
+      strSource,
+      strTags,
+      strYoutube,
+      ...otherProps
+    } = data;
 
-  return <PartyContext.Provider value={useMemo(() => [state, dispatch], [state])}>{children}</PartyContext.Provider>;
+    const materials: any[] = Object.keys(otherProps)
+      .filter((key) => key.includes('Ingredient'))
+      .map((key) => {
+        const ingredient = otherProps[key];
+        const measure = otherProps[`strMeasure${key.slice(-1)}`];
+        return (
+          ingredient &&
+          measure && {
+            title: ingredient,
+            amount: measure
+          }
+        );
+      })
+      .filter(Boolean);
+
+    const transformedData: any = {
+      Title: strMeal,
+      Category: strCategory,
+      Area: strArea,
+      Description: strInstructions,
+      Tags: strTags,
+      Materials: materials,
+      Source: strSource,
+      Youtube: strYoutube,
+      strMealThumb
+    };
+
+    return transformedData;
+  };
+
+  return (
+    // @ts-ignore
+    <PartyContext.Provider value={useMemo(() => [state, { dispatch, getIngredientById }], [state])}>
+      {children}
+    </PartyContext.Provider>
+  );
 }
