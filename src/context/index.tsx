@@ -11,6 +11,7 @@ interface State {
   filterData: any[];
   ingredientById: Object;
   mealsByName: any[];
+  searchData: any[];
 }
 
 interface ProviderProps {
@@ -47,7 +48,8 @@ const INIT_STATE: State = {
   allAreas: [],
   filterData: [],
   ingredientById: {},
-  mealsByName: []
+  mealsByName: [],
+  searchData: []
 };
 
 export default function Provider({ children }: ProviderProps): JSX.Element {
@@ -159,6 +161,17 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
       console.log(err);
     }
   };
+  const getSearchData = async (name: string) => {
+    try {
+      const result = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
+      dispatch({
+        type: 'searchData',
+        payload: result.data.meals
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const generateDetailData = (data: any) => {
     const {
       strArea,
@@ -206,7 +219,10 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
     <PartyContext.Provider
       // @ts-ignore
       // eslint-disable-next-line
-      value={useMemo(() => [state, { dispatch, getIngredientById, getMealsByName, getFilterData }], [state])}
+      value={useMemo(
+        () => [state, { dispatch, getIngredientById, getMealsByName, getFilterData, getSearchData }],
+        [state]
+      )}
     >
       {children}
     </PartyContext.Provider>
