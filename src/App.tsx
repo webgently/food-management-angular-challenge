@@ -1,9 +1,14 @@
 import React from 'react';
+import Provider from './context';
 import { Router } from './router';
 import './App.scss';
 
 function App() {
-  return <Router />;
+  return (
+    <Provider>
+      <Router />
+    </Provider>
+  );
 }
 
 export default App;
