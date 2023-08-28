@@ -235,6 +235,7 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
       // eslint-disable-next-line
       value={useMemo(
         () => [state, { dispatch, getIngredientById, getMealsByName, getFilterData, getSearchData }],
+        // eslint-disable-next-line
         [state]
       )}
     >
