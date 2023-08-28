@@ -1,46 +1,32 @@
-# Getting Started with Create React App
+# Foot Management System Challenge Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The purpose of this project is for demonstrating ability of organizing project structure, reusable components and how to use modern languages such as typescript and html5 also scss and other relevant technologies.
 
-## Available Scripts
+## Setting Up Environment
 
-In the project directory, you can run:
+* `node.js` and `npm` is primarily required to run this project on your local.
+* There's no need to have [React](https://react.dev/) environment but maybe helpful.
+* Clone the repository or just download the `.zip` or `.tar.gz` file and extract it.
 
-### `npm start`
+```bash
+# Setting up node_modules (npm packages)
+$ npm install or yarn install
+# Run the project on the local
+$ npm run start or yarn run start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* After following above steps, navigate to `http://localhost:3000` on your browser to check the running website.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Short Description
 
-### `npm test`
+Design implementation, functional implementation along with the mobile responsive is the core feature of this test task.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Implementation Details
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* There are three pages `/` (root page - showing random foods, latest foods, search foods by name), `/filter` (filter page - getting filtered by `area`, `ingredients`, `name`, `category`) and `/category` (category page - Showing foods by category).
+* All pages are fully mobile responsive in different devices including phone and tablet view.
+* Application is storing the data as in a service and work similar as `useContext` hook. This will demonstrate that developer is just familiar with all progressive programing.
+* Design specifications are correctly implemented using [Tailwind CSS](https://tailwindcss.com) and [SASS](https://sass-lang.com/) along with recommended fonts.
+* General code quality is supported by the [Prettier](https://prettier.io) and also IDE configuration. (If you use VS Code or Webstorm, you need to install prettier plugin on your editor.)
+* Typescript - Defined all types and models using the typescript to make sure developer is following the best practice and modern cookbooks.
+* Using different method of handling asynchronous actions using axios and so on, used different methods in different places to show you cases.
