@@ -8,6 +8,7 @@ interface State {
   allCategories: [];
   allIngredients: any[];
   allAreas: any[];
+  filterData: any[];
   ingredientById: Object;
   mealsByName: any[];
 }
@@ -44,6 +45,7 @@ const INIT_STATE: State = {
   allCategories: [],
   allIngredients: [],
   allAreas: [],
+  filterData: [],
   ingredientById: {},
   mealsByName: []
 };
@@ -120,6 +122,21 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
       console.log(err);
     }
   };
+  const getFilterData = async (option: string, text: string) => {
+    try {
+      const result = await axios.get(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?${
+          option === 'areas' ? 'a' : option === 'categories' ? 'c' : 'i'
+        }=${text}`
+      );
+      dispatch({
+        type: 'filterData',
+        payload: result.data.meals
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const getIngredientById = async (id: string) => {
     try {
       const result = await axios.get(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
@@ -186,9 +203,11 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
   };
 
   return (
-    // @ts-ignore
-    // eslint-disable-next-line
-    <PartyContext.Provider value={useMemo(() => [state, { dispatch, getIngredientById, getMealsByName }], [state])}>
+    <PartyContext.Provider
+      // @ts-ignore
+      // eslint-disable-next-line
+      value={useMemo(() => [state, { dispatch, getIngredientById, getMealsByName, getFilterData }], [state])}
+    >
       {children}
     </PartyContext.Provider>
   );
