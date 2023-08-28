@@ -22,7 +22,7 @@ const filterOptionList: filterOptionListObject[] = [
 
 export const Filter = () => {
   const navigate: any = useNavigate();
-  const [state, { dispatch, getFilterData }]: any = usePartyContext();
+  const [state, { getFilterData }]: any = usePartyContext();
 
   const allArea = state && state?.allAreas;
   const allIngredients = state && state?.allIngredients;
