@@ -11,5 +11,5 @@
 }
 
 body {
-  @apply bg-gradient-to-b from-black-start to-black-end min-h-100vh;
+  @apply bg-gradient-to-b from-black-start to-black-end min-h-100vh text-[10px] xsx:text-[12px] sm:text-[14px] md:text-[18px] lg:text-[22px];
 }
