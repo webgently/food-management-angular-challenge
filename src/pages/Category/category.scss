@@ -1,0 +1,6 @@
+.category-container {
+  @apply flex px-[2em] pb-[2em];
+  > div {
+    @apply container grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 justify-center items-center gap-[1.2em] max-w-[1440px];
+  }
+}
