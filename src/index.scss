@@ -9,3 +9,7 @@
 .font-mulish {
   font-family: 'Mulish', sans-serif;
 }
+
+body {
+  @apply bg-gradient-to-b from-black-start to-black-end min-h-100vh;
+}
