@@ -38,9 +38,9 @@ export const Meal = () => {
                           <div className="material-container">
                             {key} :{' '}
                             <div className="material-group">
-                              {ingredientData[key].map((item: any) => {
+                              {ingredientData[key].map((item: any, ind: number) => {
                                 return (
-                                  <div key={item.title} onClick={() => navigate(`/ingredients/${item.title}`)}>
+                                  <div key={item.title + ind} onClick={() => navigate(`/ingredients/${item.title}`)}>
                                     <img
                                       src={`https://www.themealdb.com/images/ingredients/${item.title}-Small.png`}
                                       alt={item.title}
