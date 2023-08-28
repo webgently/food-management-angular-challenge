@@ -1,0 +1,27 @@
+.ingredients-container {
+  @apply flex px-[2em] pb-[2em];
+  > div {
+    @apply container flex flex-col gap-[14px] max-w-[1440px];
+    > span {
+      @apply text-primary hover:text-secondary text-[22px] font-[400] cursor-pointer w-min;
+    }
+    > div {
+      @apply flex flex-col md:flex-row gap-[2em];
+      .image-container  {
+        @apply w-full md:w-[40%] h-min rounded-[20px] overflow-hidden;
+        img {
+          @apply rounded-[20px];
+          transition: transform 0.5s ease;
+        }
+        &:hover {
+          img {
+            transform: scale(1.2);
+          }
+        }
+      }
+      .meals-group {
+        @apply w-full md:w-[60%] grid xsx:grid-cols-2 xl:grid-cols-3 justify-center items-center gap-[1.2em];
+      }
+    }
+  }
+}
