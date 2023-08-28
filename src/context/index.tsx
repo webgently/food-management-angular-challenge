@@ -1,7 +1,9 @@
-import { createContext, useContext, useReducer, useMemo, Dispatch, ReactNode } from 'react';
+import { createContext, useContext, useReducer, useEffect, useMemo, Dispatch, ReactNode } from 'react';
 import axios from 'axios';
 
-interface State {}
+interface State {
+  latestData: any[];
+}
 
 interface ProviderProps {
   children: ReactNode;
@@ -28,10 +30,27 @@ function reducer(state: State, { type, payload }: Action): State {
   };
 }
 
-const INIT_STATE: State = {};
+const INIT_STATE: State = {
+  latestData: []
+};
 
 export default function Provider({ children }: ProviderProps): JSX.Element {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
+
+  useEffect(() => {
+    (async () => {
+      getLatestData();
+    })();
+    // eslint-disable-next-line
+  }, []);
+
+  const getLatestData = async () => {
+    const result = await axios.get(`https://themealdb.com/api/json/v2/1/latest.php`);
+    dispatch({
+      type: 'latestData',
+      payload: result.data.meals
+    });
+  };
 
   return <PartyContext.Provider value={useMemo(() => [state, dispatch], [state])}>{children}</PartyContext.Provider>;
 }
