@@ -36,7 +36,7 @@ export const Home = () => {
                 <MealCard
                   key={item.idMeal}
                   image={item.strMealThumb}
-                  title={item.Title}
+                  title={item.strMeal}
                   onClick={() => navigate(`/meals/${item.idMeal}`)}
                 />
               );
