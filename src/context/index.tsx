@@ -7,6 +7,7 @@ interface State {
   randomData: any[];
   allCategories: [];
   allIngredients: any[];
+  allAreas: any[];
   ingredientById: Object;
   mealsByName: any[];
 }
@@ -42,6 +43,7 @@ const INIT_STATE: State = {
   randomData: [],
   allCategories: [],
   allIngredients: [],
+  allAreas: [],
   ingredientById: {},
   mealsByName: []
 };
@@ -59,6 +61,7 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
       await getRandomData();
       await getAllCategories();
       await getAllIngredients();
+      await getAllAreas();
       dispatch({
         type: 'isLoading',
         payload: false
@@ -100,6 +103,17 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
       const result = await axios.get('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
       dispatch({
         type: 'allIngredients',
+        payload: result.data.meals
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const getAllAreas = async () => {
+    try {
+      const result = await axios.get('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+      dispatch({
+        type: 'allAreas',
         payload: result.data.meals
       });
     } catch (err) {
