@@ -2,6 +2,7 @@ import { createContext, useContext, useReducer, useEffect, useMemo, Dispatch, Re
 import axios from 'axios';
 
 interface State {
+  isLoading: boolean;
   latestData: any[];
 }
 
@@ -31,6 +32,7 @@ function reducer(state: State, { type, payload }: Action): State {
 }
 
 const INIT_STATE: State = {
+  isLoading: false,
   latestData: []
 };
 
@@ -39,7 +41,15 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
 
   useEffect(() => {
     (async () => {
-      getLatestData();
+      dispatch({
+        type: 'isLoading',
+        payload: true
+      });
+      await getLatestData();
+      dispatch({
+        type: 'isLoading',
+        payload: false
+      });
     })();
     // eslint-disable-next-line
   }, []);
