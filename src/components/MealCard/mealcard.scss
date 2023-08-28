@@ -1,0 +1,13 @@
+.meal-category-item {
+  @apply flex justify-center items-center bg-thick p-[0.8em] rounded-[8px] cursor-pointer relative;
+  p {
+    @apply hidden justify-center items-center text-white text-center text-[18px] md:text-[20px] lg:text-[24px] font-[600] absolute w-full h-full rounded-[8px] p-[0.8em];
+  }
+  &:hover {
+    p {
+      @apply flex;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+  }
+}
