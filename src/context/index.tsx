@@ -6,6 +6,7 @@ interface State {
   latestData: any[];
   randomData: any[];
   ingredientById: Object;
+  mealsByName: any[];
 }
 
 interface ProviderProps {
@@ -37,7 +38,8 @@ const INIT_STATE: State = {
   isLoading: false,
   latestData: [],
   randomData: [],
-  ingredientById: {}
+  ingredientById: {},
+  mealsByName: []
 };
 
 export default function Provider({ children }: ProviderProps): JSX.Element {
@@ -82,6 +84,17 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
       dispatch({
         type: 'ingredientById',
         payload: await generateDetailData(result.data.meals[0])
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const getMealsByName = async (name: string) => {
+    try {
+      const result = await axios.get(`https://www.themealdb.com/api/json/v2/1/filter.php?i=${name}`);
+      dispatch({
+        type: 'mealsByName',
+        payload: result.data.meals
       });
     } catch (err) {
       console.log(err);
@@ -132,7 +145,8 @@ export default function Provider({ children }: ProviderProps): JSX.Element {
 
   return (
     // @ts-ignore
-    <PartyContext.Provider value={useMemo(() => [state, { dispatch, getIngredientById }], [state])}>
+    // eslint-disable-next-line
+    <PartyContext.Provider value={useMemo(() => [state, { dispatch, getIngredientById, getMealsByName }], [state])}>
       {children}
     </PartyContext.Provider>
   );
